@@ -121,7 +121,7 @@ textarea{width:100%;font:inherit;font-size:15px;padding:9px 10px;border:1px soli
 <script>
 (function () {
   // GAS「CR 定時処理」のウェブアプリURL。gas/takayama-patch.gs を入れて「デプロイを管理」で更新したあと、~/cr-automation/webapp-url.txt の値を入れる
-  var API = '';
+  var API = 'https://script.google.com/macros/s/AKfycbwUIszTlRW20wetQ6KWe-MOoSWiqkJmg6SzsDgK_tmiQ0oi76U0EYqH50UyTTkkMto/exec';
 
   var CFG = window.TAKAYAMA, STORES = CFG.stores;
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>';
@@ -284,7 +284,7 @@ textarea{width:100%;font:inherit;font-size:15px;padding:9px 10px;border:1px soli
 <div class="newver" id="newVer" hidden><span id="newVerMsg">新しい版があります</span><button type="button" id="newVerBtn">更新する</button><button type="button" id="newVerClose" aria-label="閉じる" style="background:transparent;color:#fff;padding:9px 4px">✕</button></div>
 <script>
 (function () {
-  var VERSION = '2026-11-07a';  // 公開するたびに version.json と一緒に上げる
+  var VERSION = '2026-11-07b';  // 公開するたびに version.json と一緒に上げる
   function hardReload() { location.replace(location.pathname + '?r=' + Date.now() + location.hash); }
   document.getElementById('updBtn').addEventListener('click', hardReload);
   var store = {

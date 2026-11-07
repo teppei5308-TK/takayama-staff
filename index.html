@@ -331,7 +331,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
 <div class="newver" id="newVer" hidden><span id="newVerMsg">新しい版があります</span><button type="button" id="newVerBtn">更新する</button><button type="button" id="newVerClose" aria-label="閉じる" style="background:transparent;color:#fff;padding:9px 4px">✕</button></div>
 <script>
 (function () {
-  var VERSION = '2026-11-07a';  // 公開するたびに version.json と一緒に上げる
+  var VERSION = '2026-11-07b';  // 公開するたびに version.json と一緒に上げる
   function hardReload() { location.replace(location.pathname + '?r=' + Date.now() + location.hash); }
   document.getElementById('updBtn').addEventListener('click', hardReload);
   var store = {
