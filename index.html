@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>高山スタッフ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EEEEEE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="高山">
+<meta name="robots" content="noindex,nofollow">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600&display=swap">
+<style>
+/* creative-r.com に合わせる：#EEEEEE の地、黒文字、角のない黒ボタン、太ゴシック見出し、英字は Poppins */
+:root{color-scheme:light;
+  --ground:#F6F5F1;--panel:#FFFFFF;--ink:#000000;--ink2:#333333;--muted:#666666;--line:#E6E8E6;
+  --sun:#FFB400;--sun-ink:#8A5A00;--sun-soft:#FFF3D1;
+  --sky:#2C7CC4;--sky-soft:#E3F0FB;--mint:#1E8E62;--mint-soft:#DDF3E9;--coral:#D9572B;--coral-soft:#FCE6DC;
+  --accent:#000000;--accent-ink:#FFFFFF;--accent-soft:#DBE1E1;--sage:#C1CCCB;--gold-soft:#F1EEE4;--warn:#7A5A12;
+  --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+  --head:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+  --en:"Poppins","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink2);font-family:var(--jp);font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:560px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 16px) max(16px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 40px) max(16px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:14px}
+header{display:flex;flex-direction:column;gap:6px;padding-bottom:10px;border-bottom:3px solid var(--sun)}
+.logo{display:block;width:150px;height:auto}
+.brand{font-family:var(--en);font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:6px}
+.store{font-family:var(--head);font-size:13px;font-weight:700;color:var(--ink2)}
+h1{font-family:var(--head);font-size:24px;font-weight:900;margin:0;line-height:1.35;color:var(--ink)}
+.sub{font-size:13px;color:var(--ink2)}
+.card{background:var(--panel);padding:16px 16px 12px}
+.card h2{font-family:var(--head);font-size:15px;font-weight:900;color:var(--ink);margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.card h2 .en{font-family:var(--en);font-size:10.5px;font-weight:600;letter-spacing:.16em;color:var(--sun-ink);text-transform:uppercase}
+.agenda{display:flex;flex-direction:column;gap:10px}
+.ev{display:grid;grid-template-columns:58px 1fr;gap:10px;align-items:start}
+.ev .when{font-size:12px;font-weight:700;color:var(--muted);padding-top:2px}
+.ev.now .when{color:var(--sun-ink)}
+.ev b{font-family:var(--head);font-weight:700;font-size:15px;color:var(--ink)}
+.ev small{display:block;font-size:12px;color:var(--ink2)}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:108px;padding:14px;background:var(--panel);color:var(--ink);text-decoration:none;cursor:pointer;font:inherit;text-align:left;transition:transform .08s}
+.tile:active{transform:scale(.98)}
+.tile .ic{width:34px;height:34px;display:grid;place-items:center;background:var(--accent-soft);color:var(--ink)}
+.tile .ic svg{width:20px;height:20px}
+.tile b{font-family:var(--head);font-size:16px;font-weight:900;line-height:1.35}
+.tile small{display:block;font-size:12px;color:var(--ink2);font-weight:400;margin-top:2px}
+.tile.main{background:var(--accent);color:var(--accent-ink)}
+.tile.main .ic{background:var(--sun);color:#000}
+.tile.wide{grid-column:1/-1;min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px}
+.tile.wide .ic{width:40px;height:40px}
+.tile.main small{color:var(--accent-ink);opacity:.8}
+.c-sky .ic{background:var(--sky-soft)!important;color:var(--sky)!important}
+.c-mint .ic{background:var(--mint-soft)!important;color:var(--mint)!important}
+.c-coral .ic{background:var(--coral-soft)!important;color:var(--coral)!important}
+.c-sun .ic{background:var(--sun-soft)!important;color:var(--sun-ink)!important}
+.tile.c-sky{border-top:4px solid var(--sky)}.tile.c-mint{border-top:4px solid var(--mint)}.tile.c-coral{border-top:4px solid var(--coral)}.tile.c-sun{border-top:4px solid var(--sun)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;margin-left:6px;vertical-align:2px;background:var(--gold-soft);color:var(--warn)}
+.list{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:15px;background:none;border-left:0;border-right:0;border-bottom:0;font-family:inherit;text-align:left;width:100%}
+.row:first-child{border-top:0}
+a.row{cursor:pointer}
+.row .ic{width:28px;height:28px;display:grid;place-items:center;background:var(--accent-soft);color:var(--ink);flex:none}
+.row .ic svg{width:16px;height:16px}
+.row .t{flex:1;min-width:0;font-weight:500}
+.row .t small{display:block;color:var(--muted);font-size:12px;line-height:1.4;font-weight:400}
+.row .chev{color:var(--muted);font-family:var(--en)}
+.row.off{opacity:.55}
+.copy{flex:none;border:1px solid var(--sun);background:var(--sun-soft);color:var(--sun-ink);padding:5px 14px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.kpi{display:flex;flex-direction:column;gap:10px}
+.kpi .big{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.kpi .big b{font-family:var(--en);font-size:34px;font-weight:600;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .big span{font-size:13px;color:var(--ink2)}
+.meter{height:10px;background:var(--line);position:relative}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:var(--sun)}
+.meter s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--muted)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.kv div{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:6px}
+.kv small{font-size:11.5px;color:var(--muted)}
+.kv b{font-family:var(--en);font-size:17px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.kv em{font-style:normal;font-size:12px;color:var(--ink2)}
+.rv{display:flex;flex-direction:column;gap:10px}
+.rv .head{display:flex;align-items:baseline;gap:10px}
+.rv .head b{font-family:var(--en);font-size:28px;font-weight:600;color:var(--ink)}
+.rv .item{border-top:1px solid var(--line);padding-top:8px}
+.stars{font-size:13px;letter-spacing:1px;color:var(--sun)}
+.stars.low{color:#B23A2A}
+.rv .lang{font-size:11px;color:var(--muted);margin-left:6px}
+.rv p{margin:2px 0 0;font-size:14px;color:var(--ink2);line-height:1.6}
+.updated{font-size:11px;color:var(--muted);text-align:right}
+[hidden]{display:none!important}
+.hint{font-size:12px;color:var(--muted);text-align:center;padding-top:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch{display:flex;align-items:center;gap:8px;margin-top:4px}
+.switch select{font:inherit;font-size:13px;font-weight:700;padding:6px 28px 6px 10px;border:1px solid var(--sage);background:#fff url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M7 10l5 5 5-5%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22/></svg>') no-repeat right 8px center/14px;color:var(--ink);-webkit-appearance:none;appearance:none;max-width:100%}
+.pick{display:flex;flex-direction:column;gap:10px}
+.pick a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;background:var(--panel);color:var(--ink);text-decoration:none;border-left:4px solid var(--sun)}
+.pick a b{font-family:var(--head);font-size:16px;font-weight:900}
+.pick a small{font-size:12px;color:var(--muted)}
+.draft{font-size:11px;font-weight:700;color:var(--warn);background:var(--gold-soft);padding:1px 8px;margin-left:6px;vertical-align:2px}
+</style>
+<script src="stores.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="https://storage.googleapis.com/studio-design-asset-files/projects/YPqrDMxAW5/s-1418x336_v-fms_webp_ea70511c-aac0-4bcf-95a3-be5be9011063_small.webp" alt="CREATIVE RESORT" width="150" height="36">
+    <div class="brand">Staff Portal · Takayama</div>
+    <div class="store" id="storeName">高山エリア</div>
+    <h1 id="hello">おつかれさまです</h1>
+    <div class="sub" id="today"></div>
+    <div class="switch" id="switch" hidden><label for="storeSel" class="muted" style="font-size:12px">店を切り替える</label><select id="storeSel"></select></div>
+  </header>
+
+  <section class="card" id="pickCard" hidden><h2>あなたの店を選んでください<span class="en">Select store</span></h2><div class="pick" id="pick"></div><p class="muted" style="margin:10px 0 0">一度選ぶと、次からはその店の画面が開きます。売上と口コミは、店ごとのQR（鍵付きリンク）から開いたときだけ表示されます。</p></section>
+
+  <div id="main" hidden>
+  <section class="card" id="salesCard" aria-labelledby="h-sales"><h2 id="h-sales">今月の売上<span class="en">Sales</span></h2><div id="sales" class="kpi"><div class="muted">読み込んでいます…</div></div></section>
+  <section class="card" id="reviewCard" aria-labelledby="h-rev"><h2 id="h-rev">昨日の口コミ<span class="en">Reviews</span></h2><div id="reviews" class="rv"><div class="muted">読み込んでいます…</div></div></section>
+
+  <section class="card" aria-labelledby="h-plan">
+    <h2 id="h-plan">今日と今週の予定<span class="en">Schedule</span></h2>
+    <div class="agenda" id="agenda"></div>
+  </section>
+
+  <div class="grid" id="mainTiles"></div>
+
+  <section class="card"><h2>スタッフ向けフォーム<span class="en">Forms</span></h2><div class="list" id="staffList"></div></section>
+  <section class="card"><h2>ツール<span class="en">Tools</span></h2><div class="list" id="toolList"></div></section>
+  <section class="card"><h2>資料・マニュアル<span class="en">Documents</span></h2><div class="list" id="docList"></div></section>
+  </div>
+
+  <div class="hint">スマホのホーム画面に追加すると、アプリのように開けます（iPhone：共有ボタン → ホーム画面に追加）</div>
+</div>
+
+<script>
+(function () {
+  var CFG = window.TAKAYAMA, STORES = CFG.stores;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var $ = function (id) { return document.getElementById(id); };
+
+  // URL：#s=<店ID>&k=<鍵>（鍵は店ごとに端末へ保存）
+  var Q = {};
+  (location.hash.slice(1) + '&' + location.search.slice(1)).split('&').forEach(function (p) { var m = p.match(/^([a-z]+)=([A-Za-z0-9_-]+)$/); if (m) Q[m[1]] = m[2]; });
+  var sid = (Q.s && STORES[Q.s]) ? Q.s : (store.get('tkStore') || '');
+  if (sid && !STORES[sid]) sid = '';
+  var base = location.origin + location.pathname.replace(/index\.html$/, '');
+
+  // 挨拶と日付（日本時間）
+  var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  var WD = ['日', '月', '火', '水', '木', '金', '土'];
+  $('today').textContent = (now.getMonth() + 1) + '月' + now.getDate() + '日（' + WD[now.getDay()] + '）';
+  $('hello').textContent = now.getHours() < 11 ? 'おはようございます' : 'おつかれさまです';
+
+  // 店が未選択：一覧を出して終わり
+  if (!sid) {
+    $('pickCard').hidden = false;
+    $('pick').innerHTML = CFG.order.map(function (id) { var s = STORES[id]; return '<a href="#s=' + id + '"><b>' + esc(s.name) + '</b><small>' + esc(s.en) + '　' + esc(s.hours) + '</small></a>'; }).join('');
+    window.addEventListener('hashchange', function () { location.reload(); });
+    return;
+  }
+  var S = STORES[sid];
+  store.set('tkStore', sid);
+  var key = '';
+  if (Q.k) { key = Q.k; store.set('tkKey:' + sid, key); } else { key = store.get('tkKey:' + sid) || ''; }
+  var hash = '#s=' + sid + (key ? '&k=' + key : '');
+  if (location.hash !== hash) { try { history.replaceState(null, '', base + hash); } catch (e) {} }
+  window.addEventListener('hashchange', function () { location.reload(); });
+
+  document.title = S.short + 'スタッフ';
+  $('storeName').textContent = S.name;
+  $('main').hidden = false;
+  $('switch').hidden = false;
+  var sel = $('storeSel');
+  sel.innerHTML = CFG.order.map(function (id) { return '<option value="' + id + '"' + (id === sid ? ' selected' : '') + '>' + esc(STORES[id].name) + '</option>'; }).join('');
+  sel.addEventListener('change', function () {
+    var id = sel.value, k = store.get('tkKey:' + id) || '';
+    location.hash = '#s=' + id + (k ? '&k=' + k : '');
+  });
+
+  var ICON = {
+    camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+    meat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v12H4z"/><path d="M4 11h16M9 7v12"/></svg>',
+    bowl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a9 9 0 0 1-18 0Z"/><path d="M8 7c0-1 1-1 1-2M12 7c0-1 1-1 1-2M16 7c0-1 1-1 1-2"/></svg>',
+    chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/></svg>',
+    form: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    yen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 6 8 6-8M12 12v8M7 13h10M7 17h10"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19V5"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="m8 12 2.5 2.5L16 9"/></svg>',
+    people: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 0 5 2 5 5"/></svg>'
+  };
+
+  var CHEV = '<span class="chev" aria-hidden="true">›</span>';
+
+  // メインのボタン
+  var box = $('mainTiles');
+  S.tiles.forEach(function (m) {
+    var a = document.createElement(m.go ? 'a' : 'div');
+    a.className = 'tile' + (m.cls ? ' ' + m.cls : '') + (m.c ? ' c-' + m.c : '') + (m.go ? '' : ' off');
+    if (!m.go) { a.style.opacity = '.55'; }
+    else if (m.self) { a.href = m.go + hash; }
+    else { a.href = m.go; a.target = '_blank'; a.rel = 'noopener'; }
+    a.innerHTML = '<span class="ic">' + ICON[m.ic] + '</span><span><b>' + esc(m.t) + (m.go ? '' : '<span class="badge">未登録</span>') + '</b><small>' + esc(m.s) + '</small></span>';
+    box.appendChild(a);
+  });
+
+  // 一覧（[アイコン, 名前, 説明, URL（空＝未登録）, 種類]）
+  var LIST_COLOR = { staffList: 'mint', toolList: 'sky', docList: 'coral' };
+  Object.keys(S.lists).forEach(function (id) {
+    var list = $(id);
+    list.classList.add('c-' + LIST_COLOR[id]);
+    S.lists[id].forEach(function (r) {
+      var ic = r[0], t = r[1], s = r[2], url = r[3], mode = r[4];
+      var inner = '<span class="ic">' + ICON[ic] + '</span><span class="t">' + esc(t) + (url ? '' : '<span class="badge">未登録</span>') + '<small>' + esc(s) + '</small></span>';
+      var el;
+      if (!url) {
+        el = document.createElement('div'); el.className = 'row off'; el.innerHTML = inner;
+      } else if (mode === 'copy') {
+        el = document.createElement('div'); el.className = 'row';
+        el.innerHTML = '<a class="row" style="padding:0;border:0" href="' + esc(url) + '" target="_blank" rel="noopener">' + inner + '</a><button type="button" class="copy">コピー</button>';
+        el.querySelector('.copy').onclick = function (e) {
+          var b = e.currentTarget;
+          var done = function () { b.textContent = 'コピー済み'; setTimeout(function () { b.textContent = 'コピー'; }, 1800); };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt('長押しでコピーしてください', url); });
+          else prompt('長押しでコピーしてください', url);
+        };
+      } else {
+        el = document.createElement('a'); el.className = 'row'; el.href = url; el.target = '_blank'; el.rel = 'noopener';
+        el.innerHTML = inner + CHEV;
+      }
+      list.appendChild(el);
+    });
+  });
+
+  // 今日と今週の予定：定休日と、店ごとの決まりごと（stores.js の events: [[日, 見出し, 説明], ...]）
+  var d = now.getDate(), last = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  var ev = [];
+  var closed = S.closed || [];
+  if (closed.indexOf(now.getDay()) >= 0) ev.push(['今日', '定休日', S.name + 'は' + WD[now.getDay()] + '曜が定休です']);
+  var tmr = new Date(now.getTime()); tmr.setDate(tmr.getDate() + 1);
+  if (closed.indexOf(tmr.getDay()) >= 0) ev.push(['明日', '定休日', '閉店チェックのあと、翌営業日の準備を']);
+  if (d === last) ev.push(['今日', '月末', '営業日報は今月分をすべて入力。当月累計アプリの数字を確認']);
+  if (d === 1) ev.push(['今日', '月初', '当月累計アプリの予算が入っているか確認']);
+  var UP = (S.events || []);
+  var next = UP.map(function (u) { var diff = u[0] - d; if (diff <= 0) diff += last; return [diff, u[1], u[2]]; })
+    .filter(function (x) { return x[0] > 0 && x[0] <= 7; }).sort(function (a, b) { return a[0] - b[0]; });
+  UP.forEach(function (u) { if (u[0] === d) ev.push(['今日', u[1], u[2]]); });
+  var html = ev.map(function (e) { return '<div class="ev now"><div class="when">' + esc(e[0]) + '</div><div><b>' + esc(e[1]) + '</b><small>' + esc(e[2]) + '</small></div></div>'; }).join('');
+  html += next.map(function (n) { return '<div class="ev"><div class="when">' + n[1] + '日</div><div><b>' + esc(n[1]) + '</b><small>あと' + n[0] + '日</small></div></div>'; }).join('');
+  $('agenda').innerHTML = html || '<div class="muted">今週の決まった予定はありません（営業時間 ' + esc(S.hours) + '）</div>';
+
+  // 売上・口コミ（毎朝作る鍵付きデータ data/<店>.enc.json を読む。鍵は URL の #k=）
+  (function () {
+    // ホーム画面に追加したアイコンからも鍵付きで開けるよう、Android だけ起動先に鍵入りの manifest を付ける（iPhone は付けない＝いまのURLが起動先になる）
+    if (key) {
+      try {
+        var mf = { name: S.short + 'スタッフ', short_name: S.short, start_url: base + hash, scope: base, display: 'standalone',
+          background_color: '#EEEEEE', theme_color: '#000000',
+          icons: [{ src: base + 'app-icon-192.png', sizes: '192x192', type: 'image/png' }, { src: base + 'app-icon-512.png', sizes: '512x512', type: 'image/png' }] };
+        var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (!ios) {
+          var ln = document.createElement('link'); ln.rel = 'manifest';
+          ln.href = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(mf));
+          document.head.appendChild(ln);
+        }
+      } catch (e) {}
+    }
+    var salesEl = $('sales'), revEl = $('reviews');
+    var yen = function (n) { return '¥' + Math.round(n).toLocaleString('ja-JP'); };
+    var md = function (d) { var p = d.split('-'); return Number(p[1]) + '/' + Number(p[2]); };
+    var noKey = '<div class="muted">売上と口コミは、店の説明書のQRコードから開くと表示されます。ホーム画面のアイコンで出ないときは、アイコンを一度消して、QRから開き直してから「ホーム画面に追加」してください。</div>';
+    if (!key || !(window.crypto && crypto.subtle)) { salesEl.innerHTML = noKey; revEl.innerHTML = noKey; return; }
+    var b64 = function (s) { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; var bin = atob(s), u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+    fetch('data/' + sid + '.enc.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('nodata'); return r.json(); }).then(function (enc) {
+      return crypto.subtle.importKey('raw', b64(key), 'AES-GCM', false, ['decrypt']).then(function (k) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(enc.iv) }, k, b64(enc.ct));
+      });
+    }).then(function (buf) {
+      var d = JSON.parse(new TextDecoder().decode(buf));
+      var s = d.sales, y = s.yesterday, h = '';
+      if (s.target) {
+        var pct = Math.min(100, s.progress || 0);
+        h += '<div class="big"><b>' + s.progress + '%</b><span>目標 ' + yen(s.target) + ' のうち、いま ' + yen(s.total) + '（' + s.days + '日分）</span></div>';
+        h += '<div class="meter" role="img" aria-label="目標に対して' + s.progress + '%"><i style="width:' + pct + '%"></i></div>';
+      } else {
+        h += '<div class="big"><b>' + yen(s.total) + '</b><span>今月の累計（' + s.days + '日分）</span></div>';
+      }
+      h += '<div class="kv">';
+      if (s.landing) h += '<div><small>このペースだと月末</small><b>' + yen(s.landing) + '</b><em>' + (s.landing_rate ? '目標の ' + s.landing_rate + '%' : '') + '</em></div>';
+      if (y) h += '<div><small>昨日（' + md(y.date) + '）の売上</small><b>' + yen(y.sales) + '</b><em>' + (y.target ? '日の目標 ' + yen(y.target) + '・' + Math.round(y.sales / y.target * 100) + '%' : '') + (y.guests ? '　' + y.guests + '名' : '') + '</em></div>';
+      h += '</div><div class="updated">' + d.updated + ' 更新（税抜）</div>';
+      salesEl.innerHTML = h;
+      var r = d.reviews, rh = '';
+      var star = function (n) { n = Math.round(n); return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n); };
+      if (!r.count) rh = '<div class="muted">' + md(r.date) + 'の口コミはありませんでした。</div>';
+      else {
+        rh += '<div class="head"><b>' + r.count + '件</b><span class="muted">' + md(r.date) + '・平均 ★' + Number(r.avg).toFixed(1) + '</span></div>';
+        r.items.forEach(function (it) {
+          rh += '<div class="item"><span class="stars' + (it.star <= 2 ? ' low' : '') + '">' + star(it.star) + '</span><span class="lang">' + esc(it.lang || '') + '</span><p>' + esc(it.text) + '</p></div>';
+        });
+      }
+      revEl.innerHTML = rh;
+    }).catch(function (e) {
+      var msg = e && e.message === 'nodata' ? '売上データの配信はまだ始まっていません（準備中）。' : '読み込めませんでした。URLの鍵が古いか、通信が切れています。';
+      salesEl.innerHTML = '<div class="muted">' + msg + '</div>'; revEl.innerHTML = '<div class="muted">' + msg + '</div>';
+    });
+  })();
+})();
+</script>
+<style>
+/* 更新ボタンと「新しい版があります」（ホーム画面のアプリは古い画面を覚えているため） */
+.updbtn{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 10px);right:max(12px,env(safe-area-inset-right,0px));border:1px solid #C1CCCB;background:rgba(255,255,255,.95);color:#000;font:700 12px/1 "Noto Sans JP","Hiragino Sans",sans-serif;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.updbtn svg{width:14px;height:14px}
+.newver{position:fixed;z-index:21;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 96px);max-width:536px;margin:0 auto;background:#000;color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;font:500 14px/1.5 "Noto Sans JP","Hiragino Sans",sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.newver[hidden],.updbtn[hidden]{display:none!important}
+.newver button{border:0;background:#FFB400;color:#000;font:700 13px/1 inherit;padding:9px 14px;cursor:pointer;white-space:nowrap}
+</style>
+<button type="button" class="updbtn" id="updBtn" aria-label="画面を最新にする"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>更新</button>
+<div class="newver" id="newVer" hidden><span id="newVerMsg">新しい版があります</span><button type="button" id="newVerBtn">更新する</button><button type="button" id="newVerClose" aria-label="閉じる" style="background:transparent;color:#fff;padding:9px 4px">✕</button></div>
+<script>
+(function () {
+  var VERSION = '2026-11-07a';  // 公開するたびに version.json と一緒に上げる
+  function hardReload() { location.replace(location.pathname + '?r=' + Date.now() + location.hash); }
+  document.getElementById('updBtn').addEventListener('click', hardReload);
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var serverVer = '';
+  document.getElementById('newVerBtn').addEventListener('click', function () { store.set('tkTriedVer', serverVer); hardReload(); });
+  document.getElementById('newVerClose').addEventListener('click', function () { store.set('tkSkipVer', serverVer); document.getElementById('newVer').hidden = true; });
+  function checkVersion() {
+    fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.v || !(j.v > VERSION) || store.get('tkSkipVer') === j.v) return;
+        serverVer = j.v;
+        if (store.get('tkTriedVer') === j.v) {
+          document.getElementById('newVerMsg').textContent = '最新にできませんでした。アプリを完全に閉じて開き直してください';
+          document.getElementById('newVerBtn').hidden = true;
+        }
+        document.getElementById('newVer').hidden = false;
+      })
+      .catch(function () {});
+  }
+  checkVersion();
+  var hiddenAt = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { hiddenAt = Date.now(); return; }
+    if (hiddenAt && Date.now() - hiddenAt > 30 * 60 * 1000) hardReload(); else checkVersion();
+  });
+})();
+</script>
+</body>
+</html>

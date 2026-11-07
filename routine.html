@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ルーティンチェック｜高山</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EEEEEE">
+<meta name="robots" content="noindex,nofollow">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600&display=swap">
+<style>
+/* スタッフページ（index.html）と同じ見た目：#EEEEEE の地・白カード・黒・角なし */
+:root{color-scheme:light;
+  --ground:#F6F5F1;--panel:#FFFFFF;--ink:#000000;--ink2:#333333;--muted:#666666;--line:#E6E8E6;--sage:#C1CCCB;
+  --sun:#FFB400;--sun-ink:#8A5A00;--sun-soft:#FFF3D1;
+  --ok:#1F6F5C;--ok-soft:#E2EFE9;--warn:#B23A2A;--warn-soft:#F8E6E3;
+  --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+  --head:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+  --en:"Poppins","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink2);font-family:var(--jp);font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:560px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 14px) max(16px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 120px) max(16px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:12px}
+.back{font-size:13px;color:var(--ink2);text-decoration:none}
+.brand{font-family:var(--en);font-size:11px;letter-spacing:.18em;color:var(--sun-ink);font-weight:600;text-transform:uppercase}
+h1{font-family:var(--head);font-size:22px;font-weight:900;margin:0;color:var(--ink);line-height:1.35}
+.sub{font-size:13px;color:var(--ink2)}
+.card{background:var(--panel);padding:14px 16px}
+.card h2{font-family:var(--head);font-size:15px;font-weight:900;color:var(--ink);margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.card h2 .en{font-family:var(--en);font-size:10.5px;font-weight:600;letter-spacing:.16em;color:var(--sun-ink);text-transform:uppercase}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tab{border:1px solid var(--sage);background:var(--panel);color:var(--ink);font:inherit;font-size:14px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.tab small{font-size:11.5px;font-weight:500;color:var(--muted)}
+.tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:inset 0 -4px 0 var(--sun)}
+.tab[aria-pressed="true"] small{color:#ddd}
+.tab .done{color:var(--ok);font-weight:700}
+.tab[aria-pressed="true"] .done{color:#9fe0c9}
+.name{display:flex;gap:8px;align-items:center}
+.name input{flex:1;min-width:0;font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--sage);background:#fff;color:var(--ink)}
+.name label{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap}
+.items{list-style:none;margin:0;padding:0}
+.item{display:flex;align-items:center;gap:12px;padding:12px 2px;border-top:1px solid var(--line);cursor:pointer;user-select:none}
+.item:first-child{border-top:0}
+.box{width:28px;height:28px;border:2px solid var(--ink);flex:none;display:grid;place-items:center;background:#fff}
+.box svg{width:18px;height:18px;opacity:0}
+.item[aria-checked="true"] .box{background:var(--sun);border-color:var(--sun)}
+.item[aria-checked="true"] .box svg{opacity:1}
+.item[aria-checked="true"] .t{color:var(--muted);text-decoration:line-through}
+.item .t{font-size:15px;color:var(--ink);font-weight:500}
+.item:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.progress{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink2);margin-bottom:8px}
+.progress b{font-family:var(--en);font-size:18px;color:var(--ink)}
+.allbtn{border:1px solid var(--sun);background:var(--sun-soft);font:inherit;font-size:12px;padding:4px 10px;cursor:pointer;color:var(--ink2)}
+textarea{width:100%;font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--sage);min-height:64px;resize:vertical;color:var(--ink)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:3px solid var(--sun);padding:12px max(16px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 12px) max(16px,env(safe-area-inset-left))}
+.bar .in{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:6px}
+.send{width:100%;border:0;background:var(--ink);color:#fff;font:inherit;font-size:16px;font-weight:700;padding:14px;cursor:pointer}
+.send[disabled]{background:#9a9a9a;cursor:default}
+.note{font-size:12px;color:var(--muted);text-align:center}
+.msg{padding:10px 12px;font-size:14px}
+.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.msg.ng{background:var(--warn-soft);color:var(--warn)}
+.log{list-style:none;margin:0;padding:0}
+.log li{border-top:1px solid var(--line);padding:9px 0;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:13.5px}
+.log li:first-child{border-top:0}
+.log .when{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.log .what b{color:var(--ink)}
+.log .miss{grid-column:2;color:var(--warn);font-size:12.5px}
+.muted{color:var(--muted);font-size:13px}
+[hidden]{display:none!important}
+.draft{display:inline-block;font-size:11px;font-weight:700;color:#7A5A12;background:#F1EEE4;padding:1px 8px;margin-left:6px;vertical-align:2px}
+</style>
+<script src="stores.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./" id="backLink">‹ スタッフページへ戻る</a>
+  <div>
+    <div class="brand">Routine Check · Takayama</div>
+    <h1>ルーティンチェック<span class="draft" id="draftBadge" hidden>仮の項目</span></h1>
+    <div class="sub" id="storeName"></div>
+    <div class="sub" id="today"></div>
+  </div>
+
+  <section class="card" aria-labelledby="h-which">
+    <h2 id="h-which">どのチェック？<span class="en">Select</span></h2>
+    <div class="tabs" id="tabs" role="group" aria-label="チェックの種類"></div>
+  </section>
+
+  <section class="card">
+    <div class="name"><label for="who">担当</label><input id="who" type="text" placeholder="名前（例：田中）" autocomplete="name" maxlength="20"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-items">
+    <h2 id="h-items"><span id="secTitle"></span><span class="en">Checklist</span></h2>
+    <div class="progress"><span><b id="cnt">0</b> / <span id="total">0</span> 項目</span><button type="button" class="allbtn" id="allBtn">すべてにチェック</button></div>
+    <ul class="items" id="items" role="list"></ul>
+    <p class="muted" id="draftNote" hidden style="margin:10px 0 0">この項目は仮のものです。店のチェック表をもとに差し替えます。</p>
+  </section>
+
+  <section class="card" id="memoCard" hidden>
+    <h2>できなかった理由・メモ<span class="en">Note</span></h2>
+    <textarea id="memo" maxlength="200" placeholder="例：製氷機の調子が悪く、店長に報告済み"></textarea>
+  </section>
+
+  <div id="result" hidden></div>
+
+  <section class="card" aria-labelledby="h-log">
+    <h2 id="h-log">最近の記録<span class="en">History</span></h2>
+    <ul class="log" id="log"><li class="muted">読み込んでいます…</li></ul>
+  </section>
+</div>
+
+<div class="bar"><div class="in">
+  <button type="button" class="send" id="send" disabled>チェックを完了して送信</button>
+  <div class="note" id="sendNote">名前を入れて、項目にチェックしてください</div>
+</div></div>
+
+<script>
+(function () {
+  // GAS「CR 定時処理」のウェブアプリURL。gas/takayama-patch.gs を入れて「デプロイを管理」で更新したあと、~/cr-automation/webapp-url.txt の値を入れる
+  var API = '';
+
+  var CFG = window.TAKAYAMA, STORES = CFG.stores;
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>';
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  // 店と鍵（スタッフページと同じ #s=…&k=…）
+  var Q = {};
+  location.hash.slice(1).split('&').forEach(function (p) { var m = p.match(/^([a-z]+)=([A-Za-z0-9_-]+)$/); if (m) Q[m[1]] = m[2]; });
+  var sid = (Q.s && STORES[Q.s]) ? Q.s : (store.get('tkStore') || '');
+  if (!sid || !STORES[sid]) { location.replace('./'); return; }
+  var S = STORES[sid];
+  var key = Q.k ? Q.k : (store.get('tkKey:' + sid) || '');
+  if (Q.k) store.set('tkKey:' + sid, key);
+  var hash = '#s=' + sid + (key ? '&k=' + key : '');
+  document.getElementById('backLink').href = './' + hash;
+  document.getElementById('storeName').textContent = S.name;
+  document.title = 'ルーティンチェック｜' + S.short;
+  var LISTS = S.routine || [];
+  if (S.routineDraft) { document.getElementById('draftBadge').hidden = false; document.getElementById('draftNote').hidden = false; }
+  var P = 'tk:' + sid + ':';  // 端末に保存するときの接頭辞（店ごと）
+
+  // 営業日：朝5時までは前日扱い
+  var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  var biz = new Date(now.getTime()); if (now.getHours() < 5) biz.setDate(biz.getDate() - 1);
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var bizDate = biz.getFullYear() + '-' + pad(biz.getMonth() + 1) + '-' + pad(biz.getDate());
+  var WD = ['日', '月', '火', '水', '木', '金', '土'];
+  document.getElementById('today').textContent = '営業日 ' + (biz.getMonth() + 1) + '月' + biz.getDate() + '日（' + WD[biz.getDay()] + '）';
+
+  var who = document.getElementById('who');
+  who.value = store.get(P + 'routineName') || '';
+  who.addEventListener('input', function () { store.set(P + 'routineName', who.value.trim()); update(); });
+
+  // 時間帯で最初のタブを選ぶ（15時より前は開店、それ以降は閉店）。区分IDは「<場所>_open / <場所>_close」
+  var areas = []; LISTS.forEach(function (l) { var a = l.id.split('_')[0]; if (areas.indexOf(a) < 0) areas.push(a); });
+  var area0 = store.get(P + 'routineArea') || areas[0] || 'hall';
+  if (areas.indexOf(area0) < 0) area0 = areas[0];
+  var cur = area0 + (now.getHours() >= 5 && now.getHours() < 15 ? '_open' : '_close');
+  if (!LISTS.some(function (l) { return l.id === cur; })) cur = LISTS.length ? LISTS[0].id : '';
+  var checked = {};
+  var todayDone = {};
+
+  function list() { return LISTS.filter(function (l) { return l.id === cur; })[0] || { area: '', when: '', items: [] }; }
+  function draftKey() { return P + 'routineDraft:' + bizDate + ':' + cur; }
+
+  function renderTabs() {
+    document.getElementById('tabs').innerHTML = LISTS.map(function (l) {
+      var d = todayDone[l.id];
+      return '<button type="button" class="tab" data-id="' + l.id + '" aria-pressed="' + (l.id === cur) + '">' + esc(l.area) + '<small>' + esc(l.when) + (d ? ' ・<span class="done">済 ' + esc(d) + '</span>' : '') + '</small></button>';
+    }).join('') || '<div class="muted">この店のチェック項目はまだ登録されていません</div>';
+  }
+  document.getElementById('tabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab'); if (!b) return;
+    cur = b.dataset.id; store.set(P + 'routineArea', cur.split('_')[0]);
+    loadDraft(); renderTabs(); renderItems();
+  });
+
+  function loadDraft() {
+    checked = {};
+    try { (JSON.parse(store.get(draftKey()) || '[]')).forEach(function (i) { checked[i] = true; }); } catch (e) {}
+  }
+  function saveDraft() { store.set(draftKey(), JSON.stringify(Object.keys(checked).filter(function (k) { return checked[k]; }).map(Number))); }
+
+  function renderItems() {
+    var l = list();
+    document.getElementById('secTitle').textContent = l.area + '　' + l.when;
+    document.getElementById('total').textContent = l.items.length;
+    document.getElementById('items').innerHTML = l.items.map(function (t, i) {
+      return '<li class="item" role="checkbox" tabindex="0" data-i="' + i + '" aria-checked="' + !!checked[i] + '"><span class="box">' + CHECK + '</span><span class="t">' + esc(t) + '</span></li>';
+    }).join('');
+    document.getElementById('result').hidden = true;
+    update();
+  }
+  function toggle(el) {
+    var i = Number(el.dataset.i); checked[i] = !checked[i];
+    el.setAttribute('aria-checked', String(!!checked[i])); saveDraft(); update();
+  }
+  var itemsEl = document.getElementById('items');
+  itemsEl.addEventListener('click', function (e) { var el = e.target.closest('.item'); if (el) toggle(el); });
+  itemsEl.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { var el = e.target.closest('.item'); if (el) { e.preventDefault(); toggle(el); } } });
+  document.getElementById('allBtn').addEventListener('click', function () {
+    list().items.forEach(function (_, i) { checked[i] = true; }); saveDraft(); renderItems();
+  });
+
+  var sendBtn = document.getElementById('send'), note = document.getElementById('sendNote');
+  function update() {
+    var l = list(), n = l.items.filter(function (_, i) { return checked[i]; }).length;
+    document.getElementById('cnt').textContent = n;
+    var missing = l.items.length - n;
+    document.getElementById('memoCard').hidden = !(n > 0 && missing > 0);
+    var name = who.value.trim();
+    sendBtn.disabled = !name || n === 0 || !key || !API;
+    if (!API) note.textContent = '準備中です（送信先の設定待ち）';
+    else if (!key) note.textContent = 'スタッフページのQRから開き直してください';
+    else if (!name) note.textContent = '担当の名前を入れてください';
+    else if (n === 0) note.textContent = '項目にチェックしてください';
+    else note.textContent = missing ? 'できなかった項目が ' + missing + ' つあります（理由を書いて送信できます）' : 'すべて完了。送信するとチャットに通知されます';
+    sendBtn.textContent = missing && n ? '途中までで送信' : 'チェックを完了して送信';
+  }
+
+  sendBtn.addEventListener('click', function () {
+    var l = list();
+    var done = l.items.filter(function (_, i) { return checked[i]; });
+    var miss = l.items.filter(function (_, i) { return !checked[i]; });
+    var payload = { action: 'routine', store: sid, k: key, bizDate: bizDate, list: l.id, title: l.area + ' ' + l.when, who: who.value.trim(), done: done, missing: miss, memo: document.getElementById('memo').value.trim() };
+    sendBtn.disabled = true; sendBtn.textContent = '送信しています…';
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        var box = document.getElementById('result');
+        box.hidden = false;
+        if (!res.ok) throw new Error(res.error || 'error');
+        box.className = 'msg ok';
+        box.textContent = '送信しました（' + res.time + '）。チャットに通知しました。';
+        store.set(draftKey(), '[]'); checked = {}; document.getElementById('memo').value = '';
+        renderItems(); document.getElementById('result').hidden = false; loadLog();
+      })
+      .catch(function (e) {
+        var box = document.getElementById('result');
+        box.hidden = false; box.className = 'msg ng';
+        box.textContent = '送信できませんでした。電波を確かめて、もう一度押してください。（' + e.message + '）';
+        update();
+      });
+  });
+
+  function loadLog() {
+    var el = document.getElementById('log');
+    if (!API || !key) { el.innerHTML = '<li class="muted">' + (!API ? '準備中です' : 'QRから開くと表示されます') + '</li>'; return; }
+    fetch(API + '?action=routineLog&store=' + encodeURIComponent(sid) + '&k=' + encodeURIComponent(key) + '&t=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.error);
+        todayDone = {};
+        (res.rows || []).forEach(function (r) { if (r.bizDate === bizDate && !todayDone[r.list]) todayDone[r.list] = r.who; });
+        renderTabs();
+        el.innerHTML = (res.rows || []).slice(0, 30).map(function (r) {
+          return '<li><span class="when">' + esc(r.time) + '</span><span class="what"><b>' + esc(r.title) + '</b>　' + esc(r.who) + '　' + r.doneCount + '/' + r.total + '</span>' +
+            (r.missing ? '<span class="miss">できなかった：' + esc(r.missing) + (r.memo ? '（' + esc(r.memo) + '）' : '') + '</span>' : '') + '</li>';
+        }).join('') || '<li class="muted">まだ記録がありません</li>';
+      })
+      .catch(function () { el.innerHTML = '<li class="muted">履歴を読み込めませんでした</li>'; });
+  }
+
+  loadDraft(); renderTabs(); renderItems(); loadLog();
+})();
+</script>
+<style>
+/* 更新ボタンと「新しい版があります」（ホーム画面のアプリは古い画面を覚えているため） */
+.updbtn{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 10px);right:max(12px,env(safe-area-inset-right,0px));border:1px solid #C1CCCB;background:rgba(255,255,255,.95);color:#000;font:700 12px/1 "Noto Sans JP","Hiragino Sans",sans-serif;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.updbtn svg{width:14px;height:14px}
+.newver{position:fixed;z-index:21;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 96px);max-width:536px;margin:0 auto;background:#000;color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;font:500 14px/1.5 "Noto Sans JP","Hiragino Sans",sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.newver[hidden],.updbtn[hidden]{display:none!important}
+.newver button{border:0;background:#FFB400;color:#000;font:700 13px/1 inherit;padding:9px 14px;cursor:pointer;white-space:nowrap}
+</style>
+<button type="button" class="updbtn" id="updBtn" aria-label="画面を最新にする"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>更新</button>
+<div class="newver" id="newVer" hidden><span id="newVerMsg">新しい版があります</span><button type="button" id="newVerBtn">更新する</button><button type="button" id="newVerClose" aria-label="閉じる" style="background:transparent;color:#fff;padding:9px 4px">✕</button></div>
+<script>
+(function () {
+  var VERSION = '2026-11-07a';  // 公開するたびに version.json と一緒に上げる
+  function hardReload() { location.replace(location.pathname + '?r=' + Date.now() + location.hash); }
+  document.getElementById('updBtn').addEventListener('click', hardReload);
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var serverVer = '';
+  document.getElementById('newVerBtn').addEventListener('click', function () { store.set('tkTriedVer', serverVer); hardReload(); });
+  document.getElementById('newVerClose').addEventListener('click', function () { store.set('tkSkipVer', serverVer); document.getElementById('newVer').hidden = true; });
+  function checkVersion() {
+    fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.v || !(j.v > VERSION) || store.get('tkSkipVer') === j.v) return;
+        serverVer = j.v;
+        if (store.get('tkTriedVer') === j.v) {
+          document.getElementById('newVerMsg').textContent = '最新にできませんでした。アプリを完全に閉じて開き直してください';
+          document.getElementById('newVerBtn').hidden = true;
+        }
+        document.getElementById('newVer').hidden = false;
+      })
+      .catch(function () {});
+  }
+  checkVersion();
+  var hiddenAt = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { hiddenAt = Date.now(); return; }
+    if (hiddenAt && Date.now() - hiddenAt > 30 * 60 * 1000) hardReload(); else checkVersion();
+  });
+})();
+</script>
+</body>
+</html>
